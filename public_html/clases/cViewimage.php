@@ -1,6 +1,6 @@
 <?php
 /**
- * Description of cViewimage
+ * Retrieve images from upload folder
  *
  * @author imartinez
  */
@@ -9,16 +9,26 @@ class cViewimage {
     private $sFileName;
     private $sPath;
     
-    
+    /**
+     * Set Filename and parth
+     * 
+     * @param type $sFileName
+     * @param type $sPath
+     */
     public function __construct($sFileName,$sPath) {
         $this->sFileName = $sFileName;
         $this->sPath     = $sPath;
     }
     
+    /**
+     * Get the href value of the image
+     * 
+     * @return string
+     * @todo improve for the same file name with different extensions
+     */
     public function getUrl() {
         
         $aImages = $this->listDir($this->sPath);
-       
         
         foreach ($aImages as $image) {
             $extension   = pathinfo($image, PATHINFO_EXTENSION);
@@ -35,6 +45,11 @@ class cViewimage {
         return $sUrl;
     }
     
+    /**
+     * Return all the files from the given path
+     * @param string $sPath
+     * @return array
+     */
     private function listDir($sPath) {
         $aImages = array();
         
