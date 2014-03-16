@@ -1,0 +1,6 @@
+Options -Indexes
+RewriteEngine On
+
+RewriteRule ^img/(.*)$ viewimage.php?image=$1 [T=application/x-httpd-php]
+
+ErrorDocument 404 /source/error/error404.php
