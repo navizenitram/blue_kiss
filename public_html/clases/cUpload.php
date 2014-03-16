@@ -139,8 +139,8 @@ class cUpload {
 
                             $this->bChanged = false;
                         }
-
-                       if(!move_uploaded_file($this->sFile, $sPath.$sFileName)) {
+                      
+                       if(!$this->move_uploaded_file($this->sFile, $sPath.$sFileName)) {
                            throw new Exception('Move Upload Error'); 
                        } 
                        
@@ -249,6 +249,17 @@ class cUpload {
      */
     public function getException() {
         return $this->exception;
+    }
+    /**
+     * In order to work fine with TDD the function is rewrite to be overriden in test
+     * 
+     * @param string $filename The filename of the uploaded file.
+     * @param strin $destination The destination of the moved file.
+     * @return bool
+     */
+    function move_uploaded_file($filename, $destination)
+    {
+        return move_uploaded_file($filename, $destination);
     }
             
 }
