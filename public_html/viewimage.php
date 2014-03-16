@@ -12,15 +12,18 @@ include 'config/config.php';
 /**
  * Set METAS
  */
-$aMetas['title'] = 'View Image';
-
-
 $oViewimage = new cViewimage($_GET['image'],UPLOAD_FOLDER);
 $sTitle = $_GET['image'];
 $url    = $oViewimage->getUrl();
-
 /**
  * Display HTML
  */
-include 'templates/t_viewimage.php';
+if(empty($url)) {
+    $aMetas['title'] = 'Image not found';
+    header("HTTP/1.0 404 Not Found");
+    include 'templates/t_error404.php';
+} else {
+    $aMetas['title'] = 'View Image';
+    include 'templates/t_viewimage.php';
+}
 ?>
